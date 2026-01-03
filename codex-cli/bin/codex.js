@@ -86,41 +86,16 @@ function getUpdatedPath(newDirs) {
  */
 function detectPackageManager() {
   const userAgent = process.env.npm_config_user_agent || "";
-  const execPath = process.env.npm_execpath || "";
-
   if (/\bbun\//.test(userAgent)) {
     return "bun";
   }
 
-  if (/\bpnpm\//.test(userAgent)) {
-    return "pnpm";
-  }
-
-  if (/\byarn\//.test(userAgent)) {
-    return "yarn";
-  }
-
+  const execPath = process.env.npm_execpath || "";
   if (execPath.includes("bun")) {
     return "bun";
   }
 
-  if (execPath.includes("pnpm")) {
-    return "pnpm";
-  }
-
-  if (execPath.includes("yarn")) {
-    return "yarn";
-  }
-
-  if (userAgent) {
-    return "npm";
-  }
-
-  if (execPath.includes("npm")) {
-    return "npm";
-  }
-
-  return null;
+  return userAgent ? "npm" : null;
 }
 
 const additionalDirs = [];
@@ -131,10 +106,11 @@ if (existsSync(pathDir)) {
 const updatedPath = getUpdatedPath(additionalDirs);
 
 const env = { ...process.env, PATH: updatedPath };
-const packageManager = detectPackageManager();
-if (packageManager) {
-  env[`CODEX_MANAGED_BY_${packageManager.toUpperCase()}`] = "1";
-}
+const packageManagerEnvVar =
+  detectPackageManager() === "bun"
+    ? "CODEX_MANAGED_BY_BUN"
+    : "CODEX_MANAGED_BY_NPM";
+env[packageManagerEnvVar] = "1";
 
 const child = spawn(binaryPath, process.argv.slice(2), {
   stdio: "inherit",
