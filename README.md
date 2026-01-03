@@ -21,6 +21,13 @@ Install globally with your preferred package manager. If you use npm:
 npm install -g @openai/codex
 ```
 
+When you launch Codex from a global install, it marks which package manager was used by setting an environment variable (helpful for manual smoke checks with `env | grep CODEX_MANAGED_BY`):
+
+- npm → `CODEX_MANAGED_BY_NPM`
+- pnpm → `CODEX_MANAGED_BY_PNPM`
+- yarn → `CODEX_MANAGED_BY_YARN`
+- bun → `CODEX_MANAGED_BY_BUN`
+
 Alternatively, if you use Homebrew:
 
 ```shell
