@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fesiomatyzacja Webdev"
+  short_description: "Buduj i audytuj strony usług AI"
+  default_prompt: "Użyj $fesiomatyzacja-growth, aby przeprowadzić audyt webdev tej strony, wdrożyć uzasadnione poprawki SEO, Tailwind CSS, Core Web Vitals i konwersji oraz zweryfikować rezultat w przeglądarce."

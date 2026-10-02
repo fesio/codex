@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fesiomatyzacja Growth"
+  short_description: "Audytuj i rozwijaj stronę usług AI"
+  default_prompt: "Przeanalizuj stronę usług AI, popraw SEO, konwersję, dostępność i jakość implementacji, a następnie zweryfikuj zmiany."
